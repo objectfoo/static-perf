@@ -1,0 +1,43 @@
+version: '3'
+services:
+  web:
+    links:
+      - "api0:api0"
+      - "api1:api1"
+      - "api2:api2"
+      - "static:static"
+    image: objectfoo/static-perf
+    environment:
+      - ROLE=HELLO
+    ports:
+    - "8000:80"
+    depends_on:
+    - api0
+    - api1
+    - api2
+    - static
+  api0:
+    image: objectfoo/static-perf
+    environment:
+      - ROLE=API
+    ports:
+    - "8010:80"
+  api1:
+    image: objectfoo/static-perf
+    environment:
+      - ROLE=API
+    ports:
+    - "8012:80"
+  api2:
+    image: objectfoo/static-perf
+    environment:
+      - ROLE=API
+    ports:
+    - "8014:80"
+  static:
+    image: objectfoo/static-perf
+    environment:
+      - ROLE=STATIC
+    ports:
+    - "8020:80"
+
